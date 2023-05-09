@@ -8,7 +8,7 @@ products = [
     {"id": 1, "name": "CocaCola", "descriprion": "Lime", "price": 1.5, "tax": 0.2},
     {"id": 2, "name": "Pepsi", "descriprion": "Orange", "price": 1.8, "tax": 0.3},
     {"id": 3, "name": "Fanta", "descriprion": None, "price": 2.0, "tax": 0.4, "tags": []},
-    {"id": 4, "name": "Bern", "descriprion": "PowerEnergy", "price": 2.5, "tax": 0.5, "tags": [None]}
+    {"id": 4, "name": "Bern Fire", "descriprion": "PowerEnergy", "price": 2.5, "tax": 0.5, "tags": [None]}
 ]
  
    
