@@ -8,8 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
-
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        #                "3.7"
+        # ERROR: No matching distribution found for Flask==2.3.2
+        # Error: Process completed with exit code 1.
+    
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
