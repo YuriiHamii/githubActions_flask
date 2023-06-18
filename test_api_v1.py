@@ -2,7 +2,7 @@ import json
 import pytest
 from flask import Flask
 
-from app import application
+from application import application
 
 
 @pytest.fixture
