@@ -23,6 +23,9 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  job2:
+    runs-on: ubuntu-latest
+    needs: main_pytest.job1
   # This workflow contains a single job called "build"
   build_my_CI_part:
     # The type of runner that the job will run on
