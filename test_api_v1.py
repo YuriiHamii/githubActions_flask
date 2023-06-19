@@ -15,7 +15,7 @@ def client():
 def test_get_products(client):
     response = client.get('/products')
     assert response.status_code == 200
-    assert len(response.json) == 4  # Assuming 3 products are initially present
+    assert len(response.json) == 5  # Assuming 3 products are initially present
 
 '''
 def test_add_product(client):
