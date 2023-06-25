@@ -10,7 +10,7 @@ env :
   EB_APPLICATION_NAME       : "fastapicicdebsdemo"
   EB_ENVIRONMENT_NAME       : "Fastapicicdebsdemo-env"
   DEPLOY_PACKAGE_NAME       : "fast_app_${{ github.sha }}.zip"
-  AWS_REGION                : "eu-central-1"
+  AWS_REGION                : "eu-central-1b"
 
 # Controls when the workflow will run
 on:
