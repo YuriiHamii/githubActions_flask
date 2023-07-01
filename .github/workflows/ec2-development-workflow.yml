@@ -60,7 +60,7 @@ jobs:
       run: |
         FLASK_ENV=${{secrets.FLASK_ENV}} python application.py &
         sleep 5
-        curl http://127.0.0.1:5000/ | grep "CocaCola"
+        curl http://127.0.0.1:5000/ | grep "products"
   DeployDev:
     name: Deploy to Dev
     # if: github.event_name == 'pull_request'
