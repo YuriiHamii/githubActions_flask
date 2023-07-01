@@ -78,11 +78,11 @@ jobs:
         
         # test ssh start
       - name: Execute SSH commmands on remote server new
-        uses: JimCronqvist/action-ssh@master
+        uses: actions/checkout@v2
         with:
           hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-          command: ls -la ; hostname -a
+          command: ls -la
               # ls -lah
               
              
