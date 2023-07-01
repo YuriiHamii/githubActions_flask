@@ -77,19 +77,16 @@ jobs:
         
         
         # test ssh start
-      - name: Execute SSH commmands on remote server new
+      - name: Execute SSH commmands on remote server - first
         uses: actions/checkout@v2
         with:
           hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-          command: ls -la
-              # ls -lah
-              
-             
-           
-           
-      - name: Execute SSH commmands on remote server
-        uses: JimCronqvist/action-ssh@master
+          command: ls -la ; ls -lah
+          
+          
+      - name: Execute SSH commmands on remote server - second
+        uses: actions/checkout@v2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOST_NAME : ${{ secrets.HOST_NAME  }}
