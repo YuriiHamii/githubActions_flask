@@ -86,9 +86,10 @@ jobs:
         run: |
           echo "$AWS_PRIVATE_KEY" > AmazonLinuxFrankfurtKeyPair.pem
           chmod 600 AmazonLinuxFrankfurtKeyPair.pem
-          ls -la
-          cat AmazonLinuxFrankfurtKeyPair.pem
-          ssh -o StrictHostKeyChecking=no -i AmazonLinuxFrankfurtKeyPair.pem ${USER_NAME}@${HOST_NAME}
+          # ls -la
+          # cat AmazonLinuxFrankfurtKeyPair.pem
+          # ssh -o StrictHostKeyChecking=no -i AmazonLinuxFrankfurtKeyPair.pem ${USER_NAME}@${HOST_NAME}
+          ssh -i "AmazonLinuxFrankfurtKeyPair.pem" ${USER_NAME}@${HOST_NAME}
           ls -lah
           hostname -a
           whoami
