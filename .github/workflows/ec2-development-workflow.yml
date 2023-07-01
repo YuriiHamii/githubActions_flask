@@ -84,10 +84,10 @@ jobs:
           SERVICE_NAME: ${{secrets.SERVICE_NAME}}
 
         run: |
-          echo "$AWS_PRIVATE_KEY" > private_key
-          chmod 600 private_key
+          echo "$AWS_PRIVATE_KEY" > AmazonLinuxFrankfurtKeyPair.pem
+          chmod 600 AmazonLinuxFrankfurtKeyPair.pem
           ls -la
-          # cat private_key
+          cat private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOST_NAME}
           ls -lah
           hostname -a
