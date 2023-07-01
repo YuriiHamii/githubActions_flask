@@ -107,12 +107,13 @@ jobs:
       - name: Execute SSH commmands on remote server - 3
         uses: JimCronqvist/action-ssh@master
         env:
-           AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
            HOST_NAME: ${{ secrets.HOST_NAME }}
            USER_NAME: ${{ secrets.USER_NAME }}
         with:
            hosts: '${USER_NAME}@${HOSTNAME}'
-           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
+           # privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
+           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
            debug: false
            command: |
               ls -lah
