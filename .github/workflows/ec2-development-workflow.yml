@@ -77,15 +77,15 @@ jobs:
         
         
         # test ssh start
-      - name: Execute SSH commmands on remote server - first
+      - name: Execute SSH commmands on remote server - 1
         uses: actions/checkout@v2
         with:
           hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-          command: ls -la ; ls -lah
+          command: ls -la ; ls -lah ; touch helloworld_1.txt
           
           
-      - name: Execute SSH commmands on remote server - second
+      - name: Execute SSH commmands on remote server - 2
         uses: actions/checkout@v2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
@@ -101,7 +101,24 @@ jobs:
           command: |
               ls -lah
               echo "I am $USER_NAME"
-              touch helloworld_second.txt
+              touch helloworld_2.txt
+        
+        
+      - name: Execute SSH commmands on remote server - 3
+        uses: JimCronqvist/action-ssh@master
+        env:
+           AWS_PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+           HOST_NAME: ${{ secrets.HOST_NAME }}
+           USER_NAME: ${{ secrets.USER_NAME }}
+        with:
+           hosts: '${USER_NAME}@${HOSTNAME}'
+           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
+           debug: false
+           command: |
+              ls -lah
+              hostname -a
+              whoami
+              touch helloworld_3.txt
         # test ssh end 
         
         
