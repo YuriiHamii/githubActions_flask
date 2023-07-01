@@ -77,6 +77,14 @@ jobs:
         
         
         # test ssh start
+      - name: Execute SSH commmands on remote server new
+        uses: JimCronqvist/action-ssh@master
+        with:
+           hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
+           privateKey: ${{ secrets.PRIVATE_KEY }}
+           command: ls -lah
+           
+           
       - name: Execute SSH commmands on remote server
         uses: JimCronqvist/action-ssh@master
         env:
