@@ -60,7 +60,7 @@ jobs:
       run: |
         FLASK_ENV=${{secrets.FLASK_ENV}} python application.py &
         sleep 5
-        curl http://127.0.0.1:5000/ | grep "PowerEnergy"
+        curl http://127.0.0.1:5000/products | grep "PowerEnergy"
   DeployDev:
     name: Deploy to Dev
     # if: github.event_name == 'pull_request'
@@ -100,4 +100,4 @@ jobs:
     - name: Test application
       run: |
         sleep 5
-        curl ${{ secrets.HOST_NAME  }}:${{ secrets.PORT  }} | grep "PowerEnergy"
+        curl ${{ secrets.HOST_NAME  }}:${{ secrets.PORT  }}/products | grep "PowerEnergy"
