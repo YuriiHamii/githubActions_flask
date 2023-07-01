@@ -101,11 +101,13 @@ jobs:
           command: |
               ls -lah
               echo "I am $USER_NAME"
+              touch helloworld_second.txt
         # test ssh end 
         
         
         
       - name: Deploy in EC2
+        # uses: actions/checkout@v2
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
           HOST_NAME : ${{ secrets.HOST_NAME  }}
@@ -118,10 +120,10 @@ jobs:
           echo "$AWS_PRIVATE_KEY" > AmazonLinuxFrankfurtKeyPair.pem
           chmod 600 AmazonLinuxFrankfurtKeyPair.pem
           ls -la
-          cat AmazonLinuxFrankfurtKeyPair.pem
+          # cat AmazonLinuxFrankfurtKeyPair.pem
           # ssh -o StrictHostKeyChecking=no -i AmazonLinuxFrankfurtKeyPair.pem ${USER_NAME}@${HOST_NAME}
           ssh -o StrictHostKeyChecking=no -i "AmazonLinuxFrankfurtKeyPair.pem" ${USER_NAME}@${HOST_NAME}
-          ls -lah
+          # ls -lah
           hostname -a
           whoami
           touch helloworld.txt
