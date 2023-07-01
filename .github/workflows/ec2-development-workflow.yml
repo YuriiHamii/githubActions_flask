@@ -81,8 +81,10 @@ jobs:
         uses: JimCronqvist/action-ssh@master
         with:
            hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
-           privateKey: ${{ secrets.PRIVATE_KEY }}
-           command: ls -lah
+           privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
+           command: |
+               ls -lah
+               ls -la 
            
            
       - name: Execute SSH commmands on remote server
