@@ -105,7 +105,7 @@ jobs:
         
         
       - name: Execute SSH commmands on remote server - 3
-        uses: JimCronqvist/action-ssh@master
+        uses: actions/checkout@v2                           # JimCronqvist/action-ssh@master
         env:
            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
            HOST_NAME: ${{ secrets.HOST_NAME }}
