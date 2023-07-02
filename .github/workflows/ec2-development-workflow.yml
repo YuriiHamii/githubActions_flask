@@ -122,8 +122,8 @@ jobs:
               touch helloworld_3.txt
      
       - name: deploy
-      - uses: actions/checkout@v2
-      - name: Login ec2
+        uses: actions/checkout@v2
+      - name: Execute SSH commmands on remote server - 4
         env:
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
           HOSTNAME: ${{ secrets.HOST_NAME }}
@@ -132,7 +132,7 @@ jobs:
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
           ls
-          touch helloworld.txt
+          touch helloworld_4.txt
         # test ssh end 
         
         
