@@ -120,6 +120,19 @@ jobs:
               hostname -a
               whoami
               touch helloworld_3.txt
+     
+      - name: deploy
+      - uses: actions/checkout@v2
+      - name: Login ec2
+        env:
+          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+          HOSTNAME: ${{ secrets.HOST_NAME }}
+          USER_NAME: ${{ secrets.USER_NAME }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
+          ls
+          touch helloworld.txt
         # test ssh end 
         
         
