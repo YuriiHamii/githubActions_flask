@@ -32,6 +32,7 @@ jobs:
           script: |
             sudo ls -la
             pwd
+            touch "Hello CICD!" >> test_cicd.txt
             #sudo apt-get -y update
             #sudo apt-get install -y apache2
             #sudo systemctl start apache2
