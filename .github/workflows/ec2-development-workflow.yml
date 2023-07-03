@@ -77,93 +77,90 @@ jobs:
         
          
         # test ssh start
-      - name: Execute SSH commmands on remote server - 1
-        uses: actions/checkout@v2
-        with:
-          hosts: 'yuriy@ec2-52-28-165-167.eu-central-1.compute.amazonaws.com'
-          privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-          command: ls -la ; ls -lah ; touch helloworld_1.txt
+        
           
-          
-      - name: Execute SSH commmands on remote server - 2
-        uses: actions/checkout@v2
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
         env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST_NAME : ${{ secrets.HOST_NAME  }}
-          USER_NAME : ${{ secrets.USER_NAME  }}
-          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-          APP_DIR: ${{secrets.APP_DIR}}
-          SERVICE_NAME: ${{secrets.SERVICE_NAME}}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
         with:
-          hosts: '${USER_NAME}@${HOST_NAME}'
-          privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-          debug: false
-          command: |
-              ls -lah
-              echo "I am $USER_NAME"
-              touch helloworld_2.txt
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo ls -la
+            pwd
+            ls -lah
+            echo "I am $USER_NAME"
+            touch helloworld_2.txt
         
         
-      - name: Execute SSH commmands on remote server - 3
-        uses: YuriiHamii/githubActions_flask/.github/workflows/ec2-development-workflow.yml@main
+#       - name: Execute SSH commmands on remote server - 3
+#         uses: YuriiHamii/githubActions_flask/.github/workflows/ec2-development-workflow.yml@main
                                                             # actions/checkout@v2
                                                             # JimCronqvist/action-ssh@master
                                                             # YuriiHamii/githubActions_flask/.github/workflows/ec2-development-workflow.yml@main
-        env:
-           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-           HOST_NAME: ${{ secrets.HOST_NAME }}
-           USER_NAME: ${{ secrets.USER_NAME }}
-        with:
-           hosts: '${USER_NAME}@${HOST_NAME}'
-           # privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
-           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-           debug: false
-           command: |
-              ls -lah
-              hostname -a
-              whoami
-              touch helloworld_3.txt
+#         env:
+#            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+#            HOST_NAME: ${{ secrets.HOST_NAME }}
+#            USER_NAME: ${{ secrets.USER_NAME }}
+#         with:
+#            hosts: '${USER_NAME}@${HOST_NAME}'
+#            # privateKey: ${{ secrets.AWS_PRIVATE_KEY }}
+#            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+#            debug: false
+#            command: |
+#               ls -lah
+#               hostname -a
+#               whoami
+#               touch helloworld_3.txt
      
-      - name: deploy
-        uses: actions/checkout@v2
-      - name: Execute SSH commmands on remote server - 4
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
-          HOSTNAME: ${{ secrets.HOST_NAME }}
-          USER_NAME: ${{ secrets.USER_NAME }}
-        run: |
-          echo "$AWS_PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
-          ls
-          touch helloworld_4.txt
+#       - name: deploy
+#         uses: actions/checkout@v2
+#       - name: Execute SSH commmands on remote server - 4
+#         env:
+#           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
+#           HOSTNAME: ${{ secrets.HOST_NAME }}
+#           USER_NAME: ${{ secrets.USER_NAME }}
+#         run: |
+#           echo "$AWS_PRIVATE_KEY" > private_key && chmod 600 private_key
+#           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
+#           ls
+#           touch helloworld_4.txt
         # test ssh end 
         
         
          
-      - name: Deploy in EC2
-        uses: actions/checkout@v2
-        env:
-          PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-          HOST_NAME : ${{ secrets.HOST_NAME  }}
-          USER_NAME : ${{ secrets.USER_NAME  }}
-          USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-          APP_DIR: ${{secrets.APP_DIR}}
-          SERVICE_NAME: ${{secrets.SERVICE_NAME}}
+#       - name: Deploy in EC2
+#         uses: actions/checkout@v2
+#         env:
+#           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
+#           HOST_NAME : ${{ secrets.HOST_NAME  }}
+#           USER_NAME : ${{ secrets.USER_NAME  }}
+#           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+#           APP_DIR: ${{secrets.APP_DIR}}
+#           SERVICE_NAME: ${{secrets.SERVICE_NAME}}
 
-        run: |
-          echo "$AWS_PRIVATE_KEY" > AmazonLinuxFrankfurtKeyPair.pem
-          chmod 600 AmazonLinuxFrankfurtKeyPair.pem
-          ls -la
-          # cat AmazonLinuxFrankfurtKeyPair.pem
-          # ssh -o StrictHostKeyChecking=no -i AmazonLinuxFrankfurtKeyPair.pem ${USER_NAME}@${HOST_NAME}
-          ssh -o StrictHostKeyChecking=no -i "AmazonLinuxFrankfurtKeyPair.pem" ${USER_NAME}@${HOST_NAME}
-          # ls -lah
-          hostname -a
-          whoami
-          touch helloworld.txt
-            cd ${APP_DIR} &&
-            git pull &&
-            echo ${USER_PASSWORD} | sudo -S systemctl restart ${SERVICE_NAME} "
+#         run: |
+#           echo "$AWS_PRIVATE_KEY" > AmazonLinuxFrankfurtKeyPair.pem
+#           chmod 600 AmazonLinuxFrankfurtKeyPair.pem
+#           ls -la
+#           # cat AmazonLinuxFrankfurtKeyPair.pem
+#           # ssh -o StrictHostKeyChecking=no -i AmazonLinuxFrankfurtKeyPair.pem ${USER_NAME}@${HOST_NAME}
+#           ssh -o StrictHostKeyChecking=no -i "AmazonLinuxFrankfurtKeyPair.pem" ${USER_NAME}@${HOST_NAME}
+#           # ls -lah
+#           hostname -a
+#           whoami
+#           touch helloworld.txt
+#             cd ${APP_DIR} &&
+#             git pull &&
+#             echo ${USER_PASSWORD} | sudo -S systemctl restart ${SERVICE_NAME} "
   Test-Remote:
     name: Test Remote Deployment
     needs: [DeployDev]
