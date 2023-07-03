@@ -35,7 +35,7 @@ jobs:
             pwd
             touch test_cicd_2.txt
             git pull
-            echo ${USER_PASSWORD} | sudo -S systemctl restart ${SERVICE_NAME}
+            echo ${USER_PASSWORD} | sudo -S systemctl restart ${SERVICE_NAME} "
             
         #sudo apt-get -y update
         #sudo apt-get install -y apache2
