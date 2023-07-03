@@ -35,7 +35,7 @@ jobs:
             pwd
             touch test_cicd_2.txt
             git pull
-            systemctl status ${SERVICE_NAME} |  sed -n 's/.*Main PID: \(.*\)$/\1/g p' | cut -f1 -d' ' | xargs kill -HUP 
+            systemctl status gunicorn |  sed -n 's/.*Main PID: \(.*\)$/\1/g p' | cut -f1 -d' ' | xargs kill -HUP 
             
         #sudo apt-get -y update
         #sudo apt-get install -y apache2
