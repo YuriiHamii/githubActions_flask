@@ -5,7 +5,7 @@ application = Flask(__name__)
 
   
 products = [
-    {"id": 1, "name": "CocaCola", "descriprion": "Coca-Tea", "price": 1.122, "tax": 0.2},
+    {"id": 1, "name": "CocaCola", "descriprion": "Coca-Tea", "price": 1.121, "tax": 0.2},
     {"id": 2, "name": "Pepsi", "descriprion": "Orange", "price": 1.8, "tax": 0.3},
     {"id": 3, "name": "Fanta", "descriprion": None, "price": 2.0, "tax": 0.4, "tags": []},
     {"id": 4, "name": "Bern Fire", "descriprion": "PowerEnergy", "price": 2.5, "tax": 0.5, "tags": [None]}
