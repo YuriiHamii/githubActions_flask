@@ -1,7 +1,8 @@
 name: Reminder
 on:
   schedule:
-    - cron: "0 10 * * 2"
+    #- cron: "0 10 * * 2"
+    - cron: "* * * * *"
 
 jobs:
   reminder:
@@ -11,11 +12,16 @@ jobs:
       - uses: gr2m/set-cron-schedule-action@v2
         with:
           token: ${{ secrets.PAT_WITH_WORKFLOW_SCOPE }}
+            
+            #0 10 * * 2
+            #0 15 * * 4
           cron: |
+            
             0 10 * * 2
             0 15 * * 4
           # optional: set workflow id or file name
-          workflow: my-workflow.yml
+          #workflow: my-workflow.yml
+          workflow: cron-job-1.yml
           # optional: Defaults to "ci($WORKFLOW_NAME): update cron schedule: $CRON_EXPRESSIONS".
           #           $WORKFLOW_NAME and $CRON_EXPRESSIONS will be replaced.
           message: "update cron for next reminder to do the thing"
